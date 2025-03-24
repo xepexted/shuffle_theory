@@ -1,11 +1,11 @@
 https://xepexted.github.io/shuffle_theory/
-The main basis of shuffle theory is that in a certain amount of timess after shuffling a deck one on top of each other, it will ultimately return to its original position. I discovered this after messing around with some cards.
+The main basis of shuffle theory is that in a certain amount of times after shuffling a deck one on top of each other, it will ultimately return to its original position. I discovered this after messing around with some cards.
 
 
 
      F(i)={2i−1 if 1≤i≤n/2
       {2(i−n/2) if n/2+1≤i≤n
-
+The function is piecewise (sorry idk how to write it correctly in github)
 ​	
 D: The original deck of cards.
 n: The total number of cards in the deck.
