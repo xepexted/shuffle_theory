@@ -1,3 +1,4 @@
+https://xepexted.github.io/shuffle_theory/
 The main basis of shuffle theory is that in a certain amount of timess after shuffling a deck one on top of each other, it will ultimately return to its original position. I discovered this after messing around with some cards.
       {2i−1 if 1≤i≤n/2
 F(i)={
@@ -19,3 +20,5 @@ After k=1: D' = [1,27,2,28,…,26,52]
 ​Split into Side A ([1, 27, 2, ...,]) and Side B ([28, 3, ..., 52])
 <img width="610" alt="Screenshot 2025-03-23 at 8 58 24 PM" src="https://github.com/user-attachments/assets/67ca2217-8b62-41d9-9a83-fc384c8bc917" />
 Visual representation up to 8
+
+DISCLAIMER: I DID NOT MAKE THE WEBSITE, I HAD GROK 3 HELP WITH THE CREATION OF THE SITE
