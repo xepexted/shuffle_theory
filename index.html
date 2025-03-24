@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faro Shuffle Simulator</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+        .container {
+            display: flex;
+            height: 80vh;
+            margin: 20px;
+        }
+        .side {
+            flex: 1;
+            margin: 10px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            overflow-y: auto;
+        }
+        .side h2 {
+            text-align: center;
+            color: #333;
+        }
+        .card {
+            padding: 5px 10px;
+            margin: 5px 0;
+            background-color: #f9f9f9;
+            border-radius: 3px;
+            transition: all 1s ease; /* Slower transition */
+        }
+        .controls {
+            text-align: center;
+            padding: 20px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        input {
+            padding: 8px;
+            margin: 0 10px;
+            width: 60px;
+        }
+        .shuffling {
+            animation: shuffle 1.5s ease-in-out; /* Slower animation */
+        }
+        @keyframes shuffle {
+            0% { transform: translateY(0); }
+            50% { transform: translateY(40px); } /* Larger movement */
+            100% { transform: translateY(0); }
+        }
+        .red { color: #ff0000; }
+        .black { color: #000000; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="side" id="sideA">
+            <h2>Side A</h2>
+        </div>
+        <div class="side" id="sideB">
+            <h2>Side B</h2>
+        </div>
+    </div>
+    <div class="controls">
+        <button onclick="startShuffle()">Shuffle</button>
+        <input type="number" id="shuffleCount" min="1" value="1">
+        <span>times</span>
+    </div>
+
+    <script>
+        // Create initial deck
+        const suits = ['♠', '♥', '♦', '♣'];
+        const ranks = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K'];
+        let deck = [];
+        
+        // Initialize deck
+        function createDeck() {
+            deck = [];
+            for (let suit of suits) {
+                for (let rank of ranks) {
+                    deck.push(rank + suit);
+                }
+            }
+        }
+
+        // Faro shuffle function
+        function faroShuffle(deck) {
+            const half = Math.ceil(deck.length / 2);
+            const leftHalf = deck.slice(0, half);
+            const rightHalf = deck.slice(half);
+            const newDeck = [];
+            
+            for (let i = 0; i < half; i++) {
+                if (leftHalf[i]) newDeck.push(leftHalf[i]);
+                if (rightHalf[i]) newDeck.push(rightHalf[i]);
+            }
+            return newDeck;
+        }
+
+        // Display cards with animation and colors
+        function displayCards(deck) {
+            const sideA = document.getElementById('sideA');
+            const sideB = document.getElementById('sideB');
+            const half = Math.ceil(deck.length / 2);
+            
+            // Clear previous cards
+            sideA.innerHTML = '<h2>Side A</h2>';
+            sideB.innerHTML = '<h2>Side B</h2>';
+            
+            // Split deck and display with animation and colors
+            deck.slice(0, half).forEach(card => {
+                const cardEl = document.createElement('div');
+                cardEl.className = 'card shuffling';
+                cardEl.textContent = card;
+                // Add color based on suit
+                if (card.includes('♥') || card.includes('♦')) {
+                    cardEl.classList.add('red');
+                } else {
+                    cardEl.classList.add('black');
+                }
+                sideA.appendChild(cardEl);
+            });
+            
+            deck.slice(half).forEach(card => {
+                const cardEl = document.createElement('div');
+                cardEl.className = 'card shuffling';
+                cardEl.textContent = card;
+                // Add color based on suit
+                if (card.includes('♥') || card.includes('♦')) {
+                    cardEl.classList.add('red');
+                } else {
+                    cardEl.classList.add('black');
+                }
+                sideB.appendChild(cardEl);
+            });
+        }
+
+        // Main shuffle function with multiple iterations
+        async function startShuffle() {
+            createDeck();
+            const shuffleCount = parseInt(document.getElementById('shuffleCount').value);
+            
+            for (let i = 0; i < shuffleCount; i++) {
+                deck = faroShuffle(deck);
+                displayCards(deck);
+                // Wait for animation to complete (increased to match slower animation)
+                await new Promise(resolve => setTimeout(resolve, 1600));
+            }
+        }
+
+        // Initial display
+        createDeck();
+        displayCards(deck);
+    </script>
+</body>
+</html>
