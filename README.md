@@ -3,15 +3,8 @@ The main basis of shuffle theory is that in a certain amount of timess after shu
 
 
 
-
-      {2i−1 if 1≤i≤n/2
-F(i)={
+     F(i)={2i−1 if 1≤i≤n/2
       {2(i−n/2) if n/2+1≤i≤n
-
-
-
-
-
 
 ​	
 D: The original deck of cards.
